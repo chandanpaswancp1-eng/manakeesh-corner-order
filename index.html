@@ -124,9 +124,13 @@
       transform: translateY(-1px);
     }
     a.btn.primary {
-      background: linear-gradient(180deg, #F3E6C8 0%, #E7D3A2 100%);
-      border-color: #D7C08A;
       min-height: 70px;
+      border-color: transparent;
+    }
+    a.btn.primary small,
+    a.btn.primary .chev {
+      color: inherit;
+      opacity: 0.88;
     }
     .logo-badge {
       width: 42px;
@@ -220,12 +224,12 @@
   <script>
     const CONFIG = JSON.parse(document.getElementById("site-config").textContent);
     const PLATFORMS = [
-      { key: "orderDirect", label: "Order Direct", hint: "From the restaurant", color: "#8C6A2E" },
-      { key: "talabat", label: "Talabat", hint: "Delivery", color: "#FF5A00" },
-      { key: "deliveroo", label: "Deliveroo", hint: "Delivery", color: "#00CCBC" },
-      { key: "careem", label: "Careem", hint: "Delivery", color: "#00E784" },
-      { key: "noon", label: "Noon Food", hint: "Delivery", color: "#FEEE00", ink: "#111" },
-      { key: "whatsapp", label: "Order on WhatsApp", hint: "Chat to order", color: "#25D366" }
+      { key: "orderDirect", label: "Order Direct", hint: "From the restaurant", color: "#8C6A2E", ink: "#fff", badge: "#fff", badgeInk: "#8C6A2E" },
+      { key: "talabat", label: "Talabat", hint: "Delivery", color: "#FF5A00", ink: "#fff", badge: "#fff", badgeInk: "#FF5A00" },
+      { key: "deliveroo", label: "Deliveroo", hint: "Delivery", color: "#00CCBC", ink: "#04332F", badge: "#fff", badgeInk: "#008C80" },
+      { key: "careem", label: "Careem", hint: "Delivery", color: "#00E784", ink: "#062117", badge: "#062117", badgeInk: "#00E784" },
+      { key: "noon", label: "Noon Food", hint: "Delivery", color: "#FEEE00", ink: "#111111", badge: "#111111", badgeInk: "#FEEE00" },
+      { key: "whatsapp", label: "Order on WhatsApp", hint: "Chat to order", color: "#25D366", ink: "#062117", badge: "#fff", badgeInk: "#128C7E" }
     ];
 
     function source() {
@@ -332,8 +336,8 @@
         </section>`;
       } else {
         const buttons = PLATFORMS.filter(p => branch[p.key]).map(p => `
-          <a class="btn primary" data-platform="${p.key}" href="${withSource(branch[p.key])}" target="_blank" rel="noopener">
-            <span class="logo-badge" style="background:${p.color};color:${p.ink || "#fff"}">${logoSvg(p.key)}</span>
+          <a class="btn primary" data-platform="${p.key}" href="${withSource(branch[p.key])}" target="_blank" rel="noopener" style="background:${p.color};color:${p.ink};border-color:${p.color}">
+            <span class="logo-badge" style="background:${p.badge};color:${p.badgeInk}">${logoSvg(p.key)}</span>
             <span class="btn-copy">${p.label}<small>${p.hint}</small></span>
             <span class="chev">›</span>
           </a>`).join("");
